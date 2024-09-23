@@ -1,59 +1,64 @@
 import React, { useState } from "react";
-import { Modal, Button} from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 function DeleteList(props) {
-    const [show, steShow] = useState(false);
+    // Corrected 'steShow' to 'setShow'
+    const [show, setShow] = useState(false);
 
-    const handleClose = () => steShow(false);
+    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
     return (
-        <React.Fragmant>
+        <React.Fragment> {/* Corrected 'Fragmant' to 'Fragment' */}
             <Button 
-            varient="primary"
-            onClick={(evt)=> {
-                handleShow();
-                props.getList(evt,props.elementId);
-            }}
+                variant="primary"  
+                onClick={(evt) => {
+                    handleShow();
+                    props.getList(evt, props.elementId);
+                }}
             >
                 Delete
             </Button>
+
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Delete List</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <input type="text"
+                    <input 
+                        type="text"
                         placeholder="Title"
                         name="title"
                         value={props.singledata.title}
                         disabled={true}
                         className="d-block my-3"
-                        >
-                        </input>
-                        <input type="text"
-                            placeholder="author"
-                            name="author"
-                            value={props.singleData.author}
-                            disabled={true}
-                            className="d-block my-3"
-                            >
-                        </input>
+                    />
+                    <input 
+                        type="text"
+                        placeholder="Author"
+                        name="author"
+                        value={props.singleData.author}
+                        disabled={true}
+                        className="d-block my-3"
+                    />
                 </Modal.Body>
-                <Modal.Footer> 
-                    <Button variant="secondary" onClick={handleCLose}>
-                    Close
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}> {/* Corrected 'handleCLose' to 'handleClose' */}
+                        Close
                     </Button>
                     <Button
-                        varient="primary"
+                        variant="primary"  
                         onClick={(event) => {
                             handleClose();
                             props.deleteList(event, props.elementId);
                         }}
-                        >
-                            Delete
-                        </Button>
+                    >
+                        Delete
+                    </Button>
                 </Modal.Footer>
             </Modal>
-        </React.Fragmant>
-    )
+        </React.Fragment>
+    );
 }
+
+export default DeleteList;
