@@ -2,16 +2,14 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 
 function DeleteList(props) {
-    // Corrected 'steShow' to 'setShow'
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     return (
-        <React.Fragment> {/* Corrected 'Fragmant' to 'Fragment' */}
-            <Button 
-                variant="primary"  
+        <React.Fragment>
+            <Button
+                variant="primary"
                 onClick={(evt) => {
                     handleShow();
                     props.getList(evt, props.elementId);
@@ -25,15 +23,15 @@ function DeleteList(props) {
                     <Modal.Title>Delete List</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <input 
+                    <input
                         type="text"
                         placeholder="Title"
                         name="title"
-                        value={props.singledata.title}
+                        value={props.singleData.title}
                         disabled={true}
                         className="d-block my-3"
                     />
-                    <input 
+                    <input
                         type="text"
                         placeholder="Author"
                         name="author"
@@ -43,11 +41,11 @@ function DeleteList(props) {
                     />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}> {/* Corrected 'handleCLose' to 'handleClose' */}
+                    <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
                     <Button
-                        variant="primary"  
+                        variant="primary"
                         onClick={(event) => {
                             handleClose();
                             props.deleteList(event, props.elementId);
