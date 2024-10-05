@@ -1,52 +1,41 @@
-import React from "react";
-import UpdateList from "./UpdateList";
-import DeleteList from './DeleteList'
-import "bootstrap/dist/css/bootstrap.min.css";
+import React from 'react';
 
-function Lists(props) {
-    let listrows = [];
-    props.alldata.forEach(element => {
-        listrows.push(
-            <tr key={element.id}>
-                <td>{element.id}</td>
-                <td>{element.title}</td>
-                <td>{element.author}</td>
-                <td>
-                    <UpdateList 
-                        elementId={element.id}
-                        singledata={props.singledata}
-                        getList={props.getList}
-                        updateList={props.updateList}
-                        handleChange={props.handleChange}
-                        >
-                        </UpdateList>
-                </td>
-                <td>
-                    <DeleteList
-                        elementId={element.id}
-                        singledata={props.singleData}
-                        getList={props.getList}
-                        deleteList={props.deleteList}
-                    >
-                    </DeleteList>
-                </td>
-            </tr>
-        )
-    })
-    return(
-        <table className="table table-striped">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>update</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>{listrows}</tbody>
-        </table>
-    )
+function Lists({ alldata, getList, updateList, deleteList }) {
+    return (
+        <div>
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {alldata.map(item => (
+                        <tr key={item._id}>
+                            <td>{item.title}</td>
+                            <td>{item.author}</td>
+                            <td>
+                                <button
+                                    className="btn btn-info"
+                                    onClick={() => getList(item._id)}
+                                >
+                                    Edit
+                                </button>
+                                <button
+                                    className="btn btn-danger"
+                                    onClick={() => deleteList(item._id)}
+                                >
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
 }
 
 export default Lists;
